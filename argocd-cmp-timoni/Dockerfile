@@ -11,6 +11,8 @@ RUN curl -Lo /tmp/timoni.tar.gz "https://github.com/stefanprodan/timoni/releases
     tar -xzf /tmp/timoni.tar.gz -C /usr/local/bin && \
     rm /tmp/timoni.tar.gz
 
+RUN curl -fsSL -o get_helm.sh "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
+
 RUN delgroup ping && \
     addgroup -g 998 ping && \
     adduser -D -u 999 argocd
@@ -23,5 +25,6 @@ RUN mkdir -p /home/argocd/.docker && \
 COPY docker.json /home/argocd/.docker/config.json
 COPY plugin.yaml /home/argocd/cmp-server/config/plugin.yaml
 COPY init.sh /home/argocd/init.sh
+COPY generate.sh /home/argocd/generate.sh
 
 ENTRYPOINT [ "/var/run/argocd/argocd-cmp-server" ]

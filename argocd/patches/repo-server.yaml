@@ -8,7 +8,8 @@ spec:
     spec:
       containers:
         - name: argo-cmp-timoni
-          image: ghcr.io/jmgilman/argo-cmp-timoni:0.1.0
+          # image: ghcr.io/jmgilman/argo-cmp-timoni:0.1.0
+          image: argocd-cmp-timoni:latest
           imagePullPolicy: IfNotPresent
           resources:
             requests:

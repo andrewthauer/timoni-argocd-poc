@@ -1,6 +1,20 @@
 # Timoni POC with ArgoCD
 
+This is a POC to demonstrate the usage of [Timoni](https://timoni.sh/) with
+[ArgoCD](https://argoproj.github.io/argo-cd/).
+
 ```sh
+# Make sure you have a local k8s cluster running (e.g. minikube, kind, etc.)
+# brew install kind
+
+# Build the argocd cmp plugin sidecar container image
+# NOTE: This step may change based on the local k8s tool you are using
+docker build -t argocd-cmp-timoni:latest ./argocd-cmp-timoni
+
+# Copy the image to local cluster
+# NOTE: This step may change based on the local k8s tool you are using
+# kind load docker-image argocd-cmp-timoni:latest
+
 kubectl apply -k argocd
 # wait for argocd to be ready
 
@@ -14,5 +28,5 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 open https://localhost:8080
 
 # apply the argocd app
-kubectl apply -k apps/podinfo.yaml
+kubectl apply -k apps/timoni-bundle.yaml
 ```

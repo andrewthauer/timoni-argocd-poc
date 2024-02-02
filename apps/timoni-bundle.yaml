@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/andrewthauer/timoni-argocd-poc
     targetRevision: main
-    path: workloads/podinfo
+    path: workloads/timoni-bundle
     plugin:
       env:
         - name: FOO
