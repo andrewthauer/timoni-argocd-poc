@@ -11,13 +11,7 @@ spec:
           # image: ghcr.io/jmgilman/argo-cmp-timoni:0.1.0
           image: argocd-cmp-timoni:latest
           imagePullPolicy: IfNotPresent
-          resources:
-            requests:
-              cpu: "0.5"
-              memory: "250Mi"
-            limits:
-              cpu: "1"
-              memory: "1Gi"
+          resources: {}
           securityContext:
             runAsNonRoot: true
             runAsUser: 999

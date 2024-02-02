@@ -8,8 +8,8 @@ This is a POC to demonstrate the usage of [Timoni](https://timoni.sh/) with
 The following goals are to be confirmed with this POC:
 
 - [x] Can we use Timoni as an ArgoCD CMP to render K8s manifests?
-- [ ] Can we use Timoni along side helm charts in the same application?
-- [ ] Can we pass arguments & parameters from ArgoCD Applications to Timoni
+- [x] Can we use Timoni along side helm charts in the same application?
+- [x] Can we pass arguments & parameters from ArgoCD Applications to Timoni
       bundles/modules?
 - [ ] Can we replicate a non trival helm chart in Timoni/Cue?
 - [ ] Is is the experience of managing Timoni modules & bundles better then

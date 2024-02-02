@@ -1,0 +1,26 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: timoni-with-helm-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/andrewthauer/timoni-argocd-poc
+    targetRevision: main
+    path: workloads/timoni-with-helm
+    plugin:
+      env:
+        # Visible to cmp as ARGOCD_ENV_FOO
+        - name: FOO
+          value: BAR
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: timoni-with-helm
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    automated:
+      prune: true

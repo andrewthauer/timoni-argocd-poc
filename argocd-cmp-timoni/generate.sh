@@ -19,17 +19,17 @@ export APP_NAME="${ARGOCD_APP_NAME}"
 export APP_NAMESPACE="${ARGOCD_APP_NAMESPACE}"
 # export APP_ENV="${ARGOCD_APP_NAMESPACE}"
 
+# Generate the bundle
+# TODO: Make the bundle cue file a parameters
+if [ -f "bundle.cue" ]; then
+  /usr/local/bin/timoni bundle build -f bundle.cue --runtime-from-env
+fi
+
 if [ -f "Chart.yaml" ]; then
-  # TODO: Accept parameters from values files
-  helm template chart .
+  # TODO: Accept parameters to apply values files or other helm parameters
+  /usr/local/bin/helm template chart .
 fi
 
 if [ -f "kustomization.yaml" ]; then
-  kustomize build .
-fi
-
-# Generate the bundle
-# TODO: Make the bundle cue file a paramters
-if [ -f "bundle.cue" ]; then
-  /usr/local/bin/timoni bundle build -f bundle.cue --runtime-from-env
+  /usr/local/bin/kustomize build .
 fi
