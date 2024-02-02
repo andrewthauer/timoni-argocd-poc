@@ -1,4 +1,4 @@
-# Timoni POC with ArgoCD
+# Timoni with ArgoCD POC
 
 This is a POC to demonstrate the usage of [Timoni](https://timoni.sh/) with
 [ArgoCD](https://argoproj.github.io/argo-cd/).

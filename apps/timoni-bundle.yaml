@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: timoni-bundle
+  name: timoni-bundle-app
   namespace: argocd
 spec:
   project: default
@@ -12,6 +12,7 @@ spec:
     path: workloads/timoni-bundle
     plugin:
       env:
+        # Visible to cmp as ARGOCD_ENV_FOO
         - name: FOO
           value: BAR
   destination:
