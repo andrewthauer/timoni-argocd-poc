@@ -1,2 +1,12 @@
 [tasks.build]
-run = "docker build -t argocd-cmp-timoni:latest ./argocd-cmp-timoni"
+run = """
+docker build -t argocd-cmp-timoni:latest ./argocd-cmp-timoni
+"""
+
+[tasks.redeploy]
+run = """
+docker build -t argocd-cmp-timoni:latest ./argocd-cmp-timoni
+kind load docker-image argocd-cmp-timoni:latest
+kubectl apply -k ./argocd
+kubectl rollout restart deployment argocd-repo-server -n argocd
+"""

@@ -1,17 +1,26 @@
 FROM alpine:3
 
 ARG TIMONI_VERSION=0.19.0
+ARG KUSTOMIZE_VERSION=5.3.0
+ARG TARGET_ARCH=amd64
 
 RUN apk update && apk add --no-cache \
     bash=5.2.21-r0 \
     curl=8.5.0-r0 \
     docker-credential-ecr-login=0.6.0-r15
 
+# TODO: Integrity check before installing
 RUN curl -Lo /tmp/timoni.tar.gz "https://github.com/stefanprodan/timoni/releases/download/v${TIMONI_VERSION}/timoni_${TIMONI_VERSION}_linux_amd64.tar.gz" && \
     tar -xzf /tmp/timoni.tar.gz -C /usr/local/bin && \
     rm /tmp/timoni.tar.gz
 
+# TODO: Integrity check before installing
 RUN curl -fsSL -o get_helm.sh "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
+
+# TODO: Integrity check before installing
+RUN set -ex; \
+    curl -fL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_${TARGET_ARCH}.tar.gz | tar xz && \
+    chmod +x kustomize
 
 RUN delgroup ping && \
     addgroup -g 998 ping && \
