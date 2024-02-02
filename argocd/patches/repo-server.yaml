@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      containers:
+        - name: argo-cmp-timoni
+          image: ghcr.io/jmgilman/argo-cmp-timoni:0.1.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "0.5"
+              memory: "250Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+          volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: cmp-tmp
+      volumes:
+        - name: cmp-tmp
+          emptyDir: {}
