@@ -21,7 +21,7 @@ RUN mkdir -p /home/argocd/.docker && \
     mkdir -p /home/argocd/cmp-server/config
 
 COPY docker.json /home/argocd/.docker/config.json
-COPY plugin.yml /home/argocd/cmp-server/config/plugin.yaml
+COPY plugin.yaml /home/argocd/cmp-server/config/plugin.yaml
 COPY init.sh /home/argocd/init.sh
 
 ENTRYPOINT [ "/var/run/argocd/argocd-cmp-server" ]

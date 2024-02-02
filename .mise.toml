@@ -1,0 +1,2 @@
+[tasks.build]
+run = "docker build -t argocd-cmp-timoni:latest ./argocd-cmp-timoni"

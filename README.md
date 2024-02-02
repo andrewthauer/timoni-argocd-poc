@@ -13,6 +13,6 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 # open the argocd server
 open https://localhost:8080
 
-# TODO
-# create an ArgoCD application
+# apply the argocd app
+kubectl apply -k apps/podinfo.yaml
 ```
