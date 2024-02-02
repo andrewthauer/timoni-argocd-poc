@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: podinfo
+  name: timoni-bundle
   namespace: argocd
 spec:
   project: default
@@ -16,7 +16,7 @@ spec:
           value: BAR
   destination:
     server: https://kubernetes.default.svc
-    namespace: podinfo
+    namespace: timoni-bundle
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
