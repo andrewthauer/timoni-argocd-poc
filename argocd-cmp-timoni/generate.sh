@@ -17,19 +17,23 @@ set -eo pipefail
 
 export APP_NAME="${ARGOCD_APP_NAME}"
 export APP_NAMESPACE="${ARGOCD_APP_NAMESPACE}"
+export APP_PARAMETERS="${ARGOCD_APP_PARAMETERS}"
+
+# [{"name": "values-files", "array": ["values-dev.yaml"]}, {"name": "helm-parameters", "map": {"image.tag": "v1.2.3"}}]
+# app_params="${ARGOCD_APP_PARAMETERS}"
 # export APP_ENV="${ARGOCD_APP_NAMESPACE}"
 
 # Generate the bundle
 # TODO: Make the bundle cue file a parameters
 if [ -f "bundle.cue" ]; then
-  /usr/local/bin/timoni bundle build -f bundle.cue --runtime-from-env
+  timoni bundle build -f bundle.cue --runtime-from-env
 fi
 
 if [ -f "Chart.yaml" ]; then
   # TODO: Accept parameters to apply values files or other helm parameters
-  /usr/local/bin/helm template chart .
+  helm template chart .
 fi
 
 if [ -f "kustomization.yaml" ]; then
-  /usr/local/bin/kustomize build .
+  kustomize build .
 fi

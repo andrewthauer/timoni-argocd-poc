@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+just build
+kind load docker-image argocd-cmp-timoni:latest
+kubectl apply -k ./argocd
+kubectl rollout restart deployment argocd-repo-server -n argocd

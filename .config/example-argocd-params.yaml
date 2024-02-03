@@ -1,0 +1,7 @@
+- name: values-files
+  value:
+    - values.development.yaml
+    - values.development.yaml
+- name: helm-parameters
+  value:
+    foo: bar

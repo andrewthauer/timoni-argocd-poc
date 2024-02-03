@@ -11,6 +11,13 @@ spec:
     targetRevision: main
     path: workloads/timoni-with-helm
     plugin:
+      parameters:
+        - name: values-files
+          array:
+            - values.development.yaml
+        - name: helm-parameters
+          map:
+            foo: bar
       env:
         # Visible to cmp as ARGOCD_ENV_FOO
         - name: FOO

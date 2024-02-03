@@ -1,0 +1,20 @@
+[tools]
+bats = "latest"
+helm = "latest"
+jq = "latest"
+kubectl = "latest"
+kustomize = "latest"
+yq = "latest"
+# timoni = "latest"
+
+[tasks.lint]
+run = """
+APP_NAMESPACE=test timoni bundle vet -f workloads/timoni-bundle/bundle.cue --runtime-from-env
+"""
+
+[tasks.fmt]
+run = """
+for file in */**/*.cue; do
+  cue fmt "$file"
+done
+"""
