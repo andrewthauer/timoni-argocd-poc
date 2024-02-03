@@ -12,6 +12,7 @@ The following goals are to be confirmed with this POC:
 - [x] Can we pass arguments & parameters from ArgoCD Applications to Timoni
       bundles/modules?
 - [ ] Can we replicate a non trival helm chart in Timoni/Cue?
+- [ ] Can we replicate the helm features provided by ArgoCD using a custom CMP?
 - [ ] Is is the experience of managing Timoni modules & bundles better then
       helm?
 

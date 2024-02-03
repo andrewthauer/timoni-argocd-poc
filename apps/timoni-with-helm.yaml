@@ -17,7 +17,8 @@ spec:
             - values.development.yaml
         - name: helm-parameters
           map:
-            foo: bar
+            global.app.name: foo
+            global.app.env: development
       env:
         # Visible to cmp as ARGOCD_ENV_FOO
         - name: FOO

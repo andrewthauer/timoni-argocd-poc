@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
-just build
+
+docker build -t argocd-cmp-timoni:latest ./argocd-cmp-timoni
 kind load docker-image argocd-cmp-timoni:latest
 kubectl apply -k ./argocd
 kubectl rollout restart deployment argocd-repo-server -n argocd

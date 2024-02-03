@@ -7,6 +7,9 @@ kustomize = "latest"
 yq = "latest"
 # timoni = "latest"
 
+[tasks.build]
+run = "docker build -t argocd-cmp-timoni:latest ./argocd-cmp-timoni"
+
 [tasks.lint]
 run = """
 APP_NAMESPACE=test timoni bundle vet -f workloads/timoni-bundle/bundle.cue --runtime-from-env
@@ -18,3 +21,6 @@ for file in */**/*.cue; do
   cue fmt "$file"
 done
 """
+
+[tasks."argocd-password"]
+run = "kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=\"{.data.password}\" | base64 -d"

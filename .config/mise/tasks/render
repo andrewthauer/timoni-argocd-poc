@@ -4,6 +4,8 @@
 current_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 root_dir="$current_dir/../../.."
 
+example_file="$root_dir/apps/_example_params.yaml"
+
 workload_name="$1"
 
 if [ -z "$workload_name" ]; then
@@ -11,8 +13,11 @@ if [ -z "$workload_name" ]; then
   exit 1
 fi
 
+export ARGOCD_APP_NAME="$workload_name"
+export ARGOCD_APP_NAMESPACE="$workload_name"
+
 # shellcheck disable=SC2155,SC2002
-export ARGOCD_APP_PARAMETERS="$(cat "$root_dir"/.config/example-argocd-params.yaml | yq -o json | jq -r '. | tostring')"
+export ARGOCD_APP_PARAMETERS="$(cat "${example_file}" | yq -o json | jq -r '. | tostring')"
 
 pushd "${root_dir}/workloads/${workload_name}" >/dev/null || exit
 "${root_dir}"/argocd-cmp-timoni/generate.sh
