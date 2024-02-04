@@ -23,22 +23,29 @@ render_timoni_bundle() {
 render_helm_chart() {
   values_files="$(echo "$ARGOCD_APP_PARAMETERS" |
     jq -r '.[]
-    | select(.name=="values-files")
-    | if .array == null then {} else .array end
-    | map("-f " + .)
-    | join(" ")' | xargs)"
+      | select(.name=="helmValueFiles")
+      | if .array == null then {} else .array end
+      | map("-f " + .)
+      | join(" ")
+    ' | xargs)"
 
   values="$(echo "$ARGOCD_APP_PARAMETERS" |
     jq -r '.[]
-    | select(.name=="helm-parameters")
-    | if .map == null then {} else .map end
-    | to_entries
-    | map(.key + "=\"" + .value + "\"")
-    | join(",")' | xargs)"
+      | select(.name=="helmParameters")
+      | if .map == null then {} else .map end
+      | to_entries
+      | map(.key + "=\"" + .value + "\"")
+      | join(",")
+    ' | xargs)"
 
   if [ "$values" != "" ]; then
     values="--set $values"
   fi
+
+  # TODO: Add support for setting up helm repos
+  #       this might be better to do in the init.sh??
+  # See https://github.com/argoproj/argo-cd/issues/10265
+  # helm repo add
 
   # Build the helm dependencies
   helm dependency build >&2

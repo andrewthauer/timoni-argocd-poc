@@ -1,7 +1,7 @@
-- name: values-files
+- name: helmValuesFiles
   array:
     - values.development.yaml
-- name: helm-parameters
+- name: helmParameters
   map:
     global.app.name: foo
     global.app.env: development

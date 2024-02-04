@@ -12,10 +12,10 @@ spec:
     path: workloads/timoni-with-helm
     plugin:
       parameters:
-        - name: values-files
+        - name: hemlValueFiles
           array:
             - values.development.yaml
-        - name: helm-parameters
+        - name: helmParameters
           map:
             global.app.name: foo
             global.app.env: development

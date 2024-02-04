@@ -24,3 +24,6 @@ spec:
       - ServerSideApply=true
     automated:
       prune: true
+  info:
+    - name: 'Example:'
+      value: 'https://example.com'

@@ -16,6 +16,10 @@ The following goals are to be confirmed with this POC:
 - [ ] Is is the experience of managing Timoni modules & bundles better then
       helm?
 
+## Issues
+
+- [ ] [Sidecar CMP plugin cannot use private dependencies](https://github.com/argoproj/argo-cd/issues/10265)
+
 ## Running
 
 ```sh
