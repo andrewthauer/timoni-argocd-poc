@@ -11,6 +11,9 @@ concurrency:
 jobs:
   main:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,3 +21,25 @@ jobs:
       - uses: jdx/mise-action@v2
         with:
           experimental: true
+
+      - name: Lint
+        run: |
+          mise run lint:modules
+          mise run lint:bundles
+
+      - name: Test
+        run: |
+          timoni build -n testing test ./modules/generic-app
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Modules
+        run: |
+          timoni mod push ./modules/generic-app \
+            oci://ghcr.io/andrewthauer/timoni-argocd-poc/generic-app \
+            --version 0.0.1 --latest

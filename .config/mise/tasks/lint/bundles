@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+current_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+root_dir="$current_dir/../../../.."
+
+for dir in "$root_dir"/workloads/*; do
+  workload_name="$(basename "$dir")"
+
+  if [ -f "$dir/bundle.cue" ]; then
+    echo "Validating $workload_name"
+    export APP_NAME="$workload_name"
+    export APP_NAMESPACE="$workload_name"
+    timoni bundle vet -f "$dir/bundle.cue" --runtime-from-env
+  fi
+done

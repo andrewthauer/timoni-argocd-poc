@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+current_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+root_dir="$current_dir/../../../.."
+
+for dir in "$root_dir"/modules/*; do
+  module_name="$(basename "$dir")"
+  echo "Validating $module_name"
+  timoni mod vet "$dir"
+done
